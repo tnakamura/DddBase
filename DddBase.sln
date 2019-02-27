@@ -3,9 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8A2F8060-8E8A-49EE-AB35-0A41459E17E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddBase", "src\DddBase\DddBase.csproj", "{69CF873F-4B0D-446A-BA55-8D2C609C1C1A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69CF873F-4B0D-446A-BA55-8D2C609C1C1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69CF873F-4B0D-446A-BA55-8D2C609C1C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69CF873F-4B0D-446A-BA55-8D2C609C1C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69CF873F-4B0D-446A-BA55-8D2C609C1C1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69CF873F-4B0D-446A-BA55-8D2C609C1C1A} = {8A2F8060-8E8A-49EE-AB35-0A41459E17E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {62D29197-CAC6-4FCD-9EAF-11DBCCDF5E51}
