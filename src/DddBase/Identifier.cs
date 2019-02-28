@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DddBase
 {
@@ -24,11 +23,7 @@ namespace DddBase
             {
                 return true;
             }
-            if (obj is Identifier<T> other)
-            {
-                return EqualityComparer<T>.Default.Equals(value, other.value);
-            }
-            return false;
+            return EqualityComparer<T>.Default.Equals(value, ((Identifier<T>)obj).value);
         }
 
         public override int GetHashCode()

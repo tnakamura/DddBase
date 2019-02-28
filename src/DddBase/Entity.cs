@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DddBase
 {
@@ -12,5 +10,22 @@ namespace DddBase
         }
 
         public TKey Id { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+            return EqualityComparer<TKey>.Default.Equals(Id, ((Entity<TKey>)obj).Id);
+        }
+        public override int GetHashCode()
+        {
+            return EqualityComparer<TKey>.Default.GetHashCode(Id);
+        }
     }
 }
