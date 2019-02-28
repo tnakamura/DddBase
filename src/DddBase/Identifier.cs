@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DddBase
 {
-    public abstract class Identifier<T>
+    public abstract class Identifier<T> : IComparable
     {
         readonly T value;
 
@@ -29,6 +30,12 @@ namespace DddBase
         public override int GetHashCode()
         {
             return EqualityComparer<T>.Default.GetHashCode(value);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            return Comparer<T>.Default.Compare(value, ((Identifier<T>)obj).value);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DddBase
@@ -14,7 +16,7 @@ namespace DddBase
             dictionary = new ConcurrentDictionary<TKey, TEntity>();
         }
 
-        public Task<TEntity> ResolveAsync(TKey key)
+        public Task<TEntity> FindAsync(TKey key, CancellationToken cancellationToken = default)
         {
             if (dictionary.TryGetValue(key, out var value))
             {
@@ -26,10 +28,27 @@ namespace DddBase
             }
         }
 
-        public Task StoreAsync(TEntity entity)
+        public Task SaveAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
             dictionary[entity.Id] = entity;
+            return Task.CompletedTask;
+        }
+
+        public Task ClearAsync(CancellationToken cancellationToken = default)
+        {
+            dictionary.Clear();
+            return Task.CompletedTask;
+        }
+
+        public Task<IEnumerable<TEntity>> FindAllAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult<IEnumerable<TEntity>>(dictionary.Values);
+        }
+
+        public Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+        {
+            dictionary.TryRemove(entity.Id, out _);
             return Task.CompletedTask;
         }
     }

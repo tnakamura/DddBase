@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DddBase
 {
-    public abstract class ValueObject
+    abstract class ValueObject
     {
         protected ValueObject()
         {

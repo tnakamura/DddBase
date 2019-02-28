@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Text;
 
 namespace DddBase
 {
     public interface IRepository<TEntity, TKey>
         where TEntity : Entity<TKey>
     {
-        Task<TEntity> ResolveAsync(TKey key);
+        Task<IEnumerable<TEntity>> FindAllAsync(CancellationToken cancellationToken = default);
 
-        Task StoreAsync(TEntity entity);
+        Task<TEntity> FindAsync(TKey key, CancellationToken cancellationToken = default);
+
+        Task SaveAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+        Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+        Task ClearAsync(CancellationToken cancellationToken = default);
     }
 }
