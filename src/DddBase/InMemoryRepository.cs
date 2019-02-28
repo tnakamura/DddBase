@@ -9,6 +9,11 @@ namespace DddBase
     {
         readonly ConcurrentDictionary<TKey, TEntity> dictionary;
 
+        public InMemoryRepository()
+        {
+            dictionary = new ConcurrentDictionary<TKey, TEntity>();
+        }
+
         public Task<TEntity> ResolveAsync(TKey key)
         {
             if (dictionary.TryGetValue(key, out var value))
