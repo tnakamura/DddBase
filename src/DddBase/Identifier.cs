@@ -34,8 +34,25 @@ namespace DddBase
 
         public int CompareTo(object obj)
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (obj == null)
+            {
+                return 1;
+            }
             return Comparer<T>.Default.Compare(value, ((Identifier<T>)obj).value);
+        }
+
+        public static bool operator ==(Identifier<T> left, Identifier<T> right)
+        {
+            if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
+            {
+                return false;
+            }
+            return ReferenceEquals(left, null) || left.Equals(right);
+        }
+
+        public static bool operator !=(Identifier<T> left, Identifier<T> right)
+        {
+            return !(left == right);
         }
     }
 }
