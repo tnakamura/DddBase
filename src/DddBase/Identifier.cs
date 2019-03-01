@@ -41,18 +41,18 @@ namespace DddBase
             return Comparer<T>.Default.Compare(value, ((Identifier<T>)obj).value);
         }
 
-        public static bool operator ==(Identifier<T> left, Identifier<T> right)
+        public static bool operator ==(Identifier<T> obj1, Identifier<T> obj2)
         {
-            if (ReferenceEquals(left, null) ^ ReferenceEquals(right, null))
+            if (ReferenceEquals(obj1, null) ^ ReferenceEquals(obj2, null))
             {
                 return false;
             }
-            return ReferenceEquals(left, null) || left.Equals(right);
+            return ReferenceEquals(obj1, null) || obj1.Equals(obj2);
         }
 
-        public static bool operator !=(Identifier<T> left, Identifier<T> right)
+        public static bool operator !=(Identifier<T> obj1, Identifier<T> bbj2)
         {
-            return !(left == right);
+            return !(obj1 == bbj2);
         }
     }
 }
