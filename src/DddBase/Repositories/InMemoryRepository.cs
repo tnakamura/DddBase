@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DddBase
+namespace DddBase.Repositories
 {
     internal class InMemoryRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : Entity<TKey>

@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DddBase
+namespace DddBase.Repositories
 {
     internal interface IRepository<TEntity, TKey>
         where TEntity : Entity<TKey>
