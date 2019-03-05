@@ -1,70 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace DddBase
 {
-    public abstract class ValueObject
-    {
-        protected ValueObject()
-        {
-        }
-
-        protected abstract IEnumerable<object> GetAtomicValues();
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            var other = (ValueObject)obj;
-            var thisValues = GetAtomicValues().GetEnumerator();
-            var otherValues = other.GetAtomicValues().GetEnumerator();
-            while (thisValues.MoveNext() && otherValues.MoveNext())
-            {
-                if (ReferenceEquals(thisValues.Current, null) ^
-                    ReferenceEquals(otherValues.Current, null))
-                {
-                    return false;
-                }
-                if (thisValues.Current != null &&
-                    !thisValues.Current.Equals(otherValues.Current))
-                {
-                    return false;
-                }
-            }
-            return !thisValues.MoveNext() && !otherValues.MoveNext();
-        }
-
-        public override int GetHashCode()
-        {
-            return GetAtomicValues()
-                .Select(x => x != null ? x.GetHashCode() : 0)
-                .Aggregate(0, (x, y) => x ^ y);
-        }
-
-        public static bool operator ==(ValueObject obj1, ValueObject obj2)
-        {
-            if (ReferenceEquals(obj1, null) ^ ReferenceEquals(obj2, null))
-            {
-                return false;
-            }
-            return ReferenceEquals(obj1, null) || obj1.Equals(obj2);
-        }
-
-        public static bool operator !=(ValueObject obj1, ValueObject obj2)
-        {
-            return !(obj1 == obj2);
-        }
-    }
-
     public abstract class ValueObject<T> : IEquatable<T>
         where T : ValueObject<T>
     {
@@ -72,6 +12,15 @@ namespace DddBase
         {
         }
 
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">
+        /// An object to compare with this object.
+        /// </param>
+        /// <returns>
+        /// true if the current object is equal to the other parameter; otherwise, false.
+        /// </returns>
         public bool Equals(T other)
         {
             if (other == null || GetType() != other.GetType())
@@ -85,11 +34,26 @@ namespace DddBase
             return DelegateCache.EqualsDelegate((T)this, other);
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">
+        /// The object to compare with the current object.
+        /// </param>
+        /// <returns>
+        /// true if the specified object is equal to the current object; otherwise, false.
+        /// </returns>
         public override bool Equals(object obj)
         {
             return Equals(obj as T);
         }
 
+        /// <summary>
+        /// Serves as the default hash function.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current object.
+        /// </returns>
         public override int GetHashCode()
         {
             return DelegateCache.GetHashCodeDelegate((T)this);
@@ -109,7 +73,7 @@ namespace DddBase
             return !(obj1 == obj2);
         }
 
-        class DelegateCache
+        static class DelegateCache
         {
             public static readonly Func<T, T, bool> EqualsDelegate;
 
