@@ -23,6 +23,7 @@ namespace DddBase
             }
             return EqualityComparer<TKey>.Default.Equals(Id, ((Entity<TKey>)obj).Id);
         }
+
         public override int GetHashCode()
         {
             return EqualityComparer<TKey>.Default.GetHashCode(Id);

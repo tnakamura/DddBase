@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace DddBase
 {
-    public interface IRepository<TEntity, TKey>
+    internal interface IRepository<TEntity, TKey>
         where TEntity : Entity<TKey>
     {
         Task<IEnumerable<TEntity>> FindAllAsync(CancellationToken cancellationToken = default);

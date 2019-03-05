@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DddBase
 {
-    public sealed class InMemoryRepository<TEntity, TKey> : IRepository<TEntity, TKey>
+    internal class InMemoryRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : Entity<TKey>
     {
         readonly ConcurrentDictionary<TKey, TEntity> dictionary;
