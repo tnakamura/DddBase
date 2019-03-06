@@ -85,11 +85,17 @@ namespace DddBase
                 GetHashCodeDelegate = BuildGetHashCodeDelegate();
             }
 
-            static Func<T, T, bool> BuildEqualsDelegate()
+            static MemberInfo[] GetTargetMembers()
             {
-                var members = typeof(T).GetMembers(BindingFlags.Instance | BindingFlags.Public)
+                return typeof(T).GetMembers(BindingFlags.Instance | BindingFlags.Public)
+                    .Where(x => x.GetCustomAttribute<IgnoreMemberAttribute>(true) == null)
                     .Where(x => x is FieldInfo || x is PropertyInfo)
                     .ToArray();
+            }
+
+            static Func<T, T, bool> BuildEqualsDelegate()
+            {
+                var members = GetTargetMembers();
                 if (members.Length == 0)
                 {
                     return new Func<T, T, bool>((x, y) => true);
@@ -135,9 +141,7 @@ namespace DddBase
 
             static Func<T, int> BuildGetHashCodeDelegate()
             {
-                var members = typeof(T).GetMembers(BindingFlags.Instance | BindingFlags.Public)
-                    .Where(x => x is FieldInfo || x is PropertyInfo)
-                    .ToArray();
+                var members = GetTargetMembers();
                 if (members.Length == 0)
                 {
                     return new Func<T, int>(x => 0);
