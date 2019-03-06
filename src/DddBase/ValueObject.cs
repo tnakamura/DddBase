@@ -8,6 +8,9 @@ namespace DddBase
     public abstract class ValueObject<T> : IEquatable<T>
         where T : ValueObject<T>
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="ValueObject{T}"/>.
+        /// </summary>
         protected ValueObject()
         {
         }

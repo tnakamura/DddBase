@@ -13,4 +13,8 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\src\github.com\tnakamura\DddBase\src\DddBase\DddBase.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

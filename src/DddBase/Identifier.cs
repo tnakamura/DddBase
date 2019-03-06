@@ -47,6 +47,21 @@ namespace DddBase
             return EqualityComparer<T>.Default.GetHashCode(value);
         }
 
+        /// <summary>
+        /// Compares this instance with a specified <see cref="object"/> and indicates whether this
+        /// instance precedes, follows, or appears in the same position in the sort order
+        /// as the specified <see cref="object"/>
+        /// </summary>
+        /// <param name="obj">
+        /// An object that evaluates to a <see cref="Identifier{T}"/>
+        /// </param>
+        /// <returns>
+        /// A 32-bit signed integer that indicates whether this instance precedes, follows,
+        /// or appears in the same position in the sort order as the value parameter. Value
+        /// Condition Less than zero This instance precedes value. Zero This instance has
+        /// the same position in the sort order as value. Greater than zero This instance
+        /// follows value. -or- value is null.
+        /// </returns>
         public int CompareTo(object obj)
         {
             if (obj == null)

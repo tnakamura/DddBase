@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DddBase</name>
+    </assembly>
+    <members>
+        <member name="M:DddBase.Entity`1.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="obj">
+            The object to compare with the current object.
+            </param>
+            <returns>
+            true if the specified object is equal to the current object; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:DddBase.Entity`1.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="M:DddBase.Identifier`1.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="obj">
+            The object to compare with the current object.
+            </param>
+            <returns>
+            true if the specified object is equal to the current object; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:DddBase.Identifier`1.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="M:DddBase.Identifier`1.CompareTo(System.Object)">
+            <summary>
+            Compares this instance with a specified <see cref="T:System.Object"/> and indicates whether this
+            instance precedes, follows, or appears in the same position in the sort order
+            as the specified <see cref="T:System.Object"/>
+            </summary>
+            <param name="obj">
+            An object that evaluates to a <see cref="T:DddBase.Identifier`1"/>
+            </param>
+            <returns>
+            A 32-bit signed integer that indicates whether this instance precedes, follows,
+            or appears in the same position in the sort order as the value parameter. Value
+            Condition Less than zero This instance precedes value. Zero This instance has
+            the same position in the sort order as value. Greater than zero This instance
+            follows value. -or- value is null.
+            </returns>
+        </member>
+        <member name="M:DddBase.ValueObject`1.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:DddBase.ValueObject`1"/>.
+            </summary>
+        </member>
+        <member name="M:DddBase.ValueObject`1.Equals(`0)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">
+            An object to compare with this object.
+            </param>
+            <returns>
+            true if the current object is equal to the other parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:DddBase.ValueObject`1.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="obj">
+            The object to compare with the current object.
+            </param>
+            <returns>
+            true if the specified object is equal to the current object; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:DddBase.ValueObject`1.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+    </members>
+</doc>
