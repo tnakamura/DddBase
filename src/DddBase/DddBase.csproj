@@ -11,6 +11,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryType>git</RepositoryType>
     <LangVersion>latest</LangVersion>
+    <PackageReleaseNotes>Added the ValueObject&lt;TValueObject&gt; class.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
