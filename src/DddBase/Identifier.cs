@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace DddBase
 {
-    public abstract class Identifier<T> : IComparable
+    public abstract class Identifier<TValue> : IComparable
     {
-        readonly T value;
+        readonly TValue value;
 
-        protected Identifier(T value)
+        protected Identifier(TValue value)
         {
             this.value = value;
         }
 
-        public T ToValue() => value;
+        public TValue ToValue() => value;
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
@@ -33,7 +33,7 @@ namespace DddBase
             {
                 return true;
             }
-            return EqualityComparer<T>.Default.Equals(value, ((Identifier<T>)obj).value);
+            return EqualityComparer<TValue>.Default.Equals(value, ((Identifier<TValue>)obj).value);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace DddBase
         /// </returns>
         public override int GetHashCode()
         {
-            return EqualityComparer<T>.Default.GetHashCode(value);
+            return EqualityComparer<TValue>.Default.GetHashCode(value);
         }
 
         /// <summary>
@@ -68,10 +68,10 @@ namespace DddBase
             {
                 return 1;
             }
-            return Comparer<T>.Default.Compare(value, ((Identifier<T>)obj).value);
+            return Comparer<TValue>.Default.Compare(value, ((Identifier<TValue>)obj).value);
         }
 
-        public static bool operator ==(Identifier<T> obj1, Identifier<T> obj2)
+        public static bool operator ==(Identifier<TValue> obj1, Identifier<TValue> obj2)
         {
             if (ReferenceEquals(obj1, null) ^ ReferenceEquals(obj2, null))
             {
@@ -80,7 +80,7 @@ namespace DddBase
             return ReferenceEquals(obj1, null) || obj1.Equals(obj2);
         }
 
-        public static bool operator !=(Identifier<T> obj1, Identifier<T> bbj2)
+        public static bool operator !=(Identifier<TValue> obj1, Identifier<TValue> bbj2)
         {
             return !(obj1 == bbj2);
         }

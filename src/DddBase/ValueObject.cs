@@ -5,11 +5,11 @@ using System.Reflection;
 
 namespace DddBase
 {
-    public abstract class ValueObject<T> : IEquatable<T>
-        where T : ValueObject<T>
+    public abstract class ValueObject<TValueObject> : IEquatable<TValueObject>
+        where TValueObject : ValueObject<TValueObject>
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="ValueObject{T}"/>.
+        /// Initializes a new instance of <see cref="ValueObject{TValueObject}"/>.
         /// </summary>
         protected ValueObject()
         {
@@ -24,7 +24,7 @@ namespace DddBase
         /// <returns>
         /// true if the current object is equal to the other parameter; otherwise, false.
         /// </returns>
-        public bool Equals(T other)
+        public bool Equals(TValueObject other)
         {
             if (other == null || GetType() != other.GetType())
             {
@@ -34,7 +34,7 @@ namespace DddBase
             {
                 return true;
             }
-            return DelegateCache.EqualsDelegate((T)this, other);
+            return DelegateCache.EqualsDelegate((TValueObject)this, other);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace DddBase
         /// </returns>
         public override bool Equals(object obj)
         {
-            return Equals(obj as T);
+            return Equals(obj as TValueObject);
         }
 
         /// <summary>
@@ -59,10 +59,10 @@ namespace DddBase
         /// </returns>
         public override int GetHashCode()
         {
-            return DelegateCache.GetHashCodeDelegate((T)this);
+            return DelegateCache.GetHashCodeDelegate((TValueObject)this);
         }
 
-        public static bool operator ==(ValueObject<T> obj1, ValueObject<T> obj2)
+        public static bool operator ==(ValueObject<TValueObject> obj1, ValueObject<TValueObject> obj2)
         {
             if (ReferenceEquals(obj1, null) ^ ReferenceEquals(obj2, null))
             {
@@ -71,16 +71,16 @@ namespace DddBase
             return ReferenceEquals(obj1, null) || obj1.Equals(obj2);
         }
 
-        public static bool operator !=(ValueObject<T> obj1, ValueObject<T> obj2)
+        public static bool operator !=(ValueObject<TValueObject> obj1, ValueObject<TValueObject> obj2)
         {
             return !(obj1 == obj2);
         }
 
         static class DelegateCache
         {
-            public static readonly Func<T, T, bool> EqualsDelegate;
+            public static readonly Func<TValueObject, TValueObject, bool> EqualsDelegate;
 
-            public static readonly Func<T, int> GetHashCodeDelegate;
+            public static readonly Func<TValueObject, int> GetHashCodeDelegate;
 
             static DelegateCache()
             {
@@ -90,22 +90,22 @@ namespace DddBase
 
             static MemberInfo[] GetTargetMembers()
             {
-                return typeof(T).GetMembers(BindingFlags.Instance | BindingFlags.Public)
+                return typeof(TValueObject).GetMembers(BindingFlags.Instance | BindingFlags.Public)
                     .Where(x => x.GetCustomAttribute<IgnoreMemberAttribute>(true) == null)
                     .Where(x => x is FieldInfo || x is PropertyInfo)
                     .ToArray();
             }
 
-            static Func<T, T, bool> BuildEqualsDelegate()
+            static Func<TValueObject, TValueObject, bool> BuildEqualsDelegate()
             {
                 var members = GetTargetMembers();
                 if (members.Length == 0)
                 {
-                    return new Func<T, T, bool>((x, y) => true);
+                    return new Func<TValueObject, TValueObject, bool>((x, y) => true);
                 }
 
-                var obj1 = Expression.Parameter(typeof(T), "obj1");
-                var obj2 = Expression.Parameter(typeof(T), "obj2");
+                var obj1 = Expression.Parameter(typeof(TValueObject), "obj1");
+                var obj2 = Expression.Parameter(typeof(TValueObject), "obj2");
                 Expression bodyExpr = null;
 
                 foreach (var member in members)
@@ -139,18 +139,18 @@ namespace DddBase
                 //     (obj1.Member2 == obj2.Member2) &&
                 //     ...
                 //     (obj1.MemberN == obj2.MemberN)
-                return Expression.Lambda<Func<T, T, bool>>(bodyExpr, obj1, obj2).Compile();
+                return Expression.Lambda<Func<TValueObject, TValueObject, bool>>(bodyExpr, obj1, obj2).Compile();
             }
 
-            static Func<T, int> BuildGetHashCodeDelegate()
+            static Func<TValueObject, int> BuildGetHashCodeDelegate()
             {
                 var members = GetTargetMembers();
                 if (members.Length == 0)
                 {
-                    return new Func<T, int>(x => 0);
+                    return new Func<TValueObject, int>(x => 0);
                 }
 
-                var obj = Expression.Parameter(typeof(T), "obj");
+                var obj = Expression.Parameter(typeof(TValueObject), "obj");
                 Expression bodyExpr = null;
 
                 foreach (var member in members)
@@ -190,7 +190,7 @@ namespace DddBase
                 //     (obj.Member2 == null ? 0 : obj.Member2.GetHashCode()) ^
                 //     ....
                 //     (obj.MemberN == null ? 0 : obj.MemberN.GetHashCode())
-                return Expression.Lambda<Func<T, int>>(bodyExpr, obj)
+                return Expression.Lambda<Func<TValueObject, int>>(bodyExpr, obj)
                     .Compile();
             }
         }
