@@ -16,9 +16,9 @@ namespace DddBase.Repositories
             dictionary = new ConcurrentDictionary<TKey, TEntity>();
         }
 
-        public Task<TEntity> ResolveAsync(TKey key, CancellationToken cancellationToken = default)
+        public Task<TEntity> ResolveAsync(TKey id, CancellationToken cancellationToken = default)
         {
-            if (dictionary.TryGetValue(key, out var value))
+            if (dictionary.TryGetValue(id, out var value))
             {
                 return Task.FromResult(value);
             }
@@ -35,7 +35,7 @@ namespace DddBase.Repositories
             return Task.CompletedTask;
         }
 
-        public Task ClearAsync(CancellationToken cancellationToken = default)
+        public Task DeleteAllAsync(CancellationToken cancellationToken = default)
         {
             dictionary.Clear();
             return Task.CompletedTask;

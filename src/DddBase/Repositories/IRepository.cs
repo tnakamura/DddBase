@@ -15,6 +15,6 @@ namespace DddBase.Repositories
 
         Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
 
-        Task ClearAsync(CancellationToken cancellationToken = default);
+        Task DeleteAllAsync(CancellationToken cancellationToken = default);
     }
 }
