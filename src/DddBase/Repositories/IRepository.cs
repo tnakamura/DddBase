@@ -11,9 +11,9 @@ namespace DddBase.Repositories
 
         Task<TAggregate> ResolveAsync(TKey id, CancellationToken cancellationToken = default);
 
-        Task StoreAsync(TAggregate entity, CancellationToken cancellationToken = default);
+        Task StoreAsync(TAggregate aggregate, CancellationToken cancellationToken = default);
 
-        Task DeleteAsync(TAggregate entity, CancellationToken cancellationToken = default);
+        Task DeleteAsync(TAggregate aggregate, CancellationToken cancellationToken = default);
 
         Task DeleteAllAsync(CancellationToken cancellationToken = default);
     }
