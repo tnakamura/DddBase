@@ -16,7 +16,7 @@ namespace DddBase.Repositories
             dictionary = new ConcurrentDictionary<TKey, TEntity>();
         }
 
-        public Task<TEntity> FindAsync(TKey key, CancellationToken cancellationToken = default)
+        public Task<TEntity> ResolveAsync(TKey key, CancellationToken cancellationToken = default)
         {
             if (dictionary.TryGetValue(key, out var value))
             {
@@ -28,7 +28,7 @@ namespace DddBase.Repositories
             }
         }
 
-        public Task SaveAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public Task StoreAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
             dictionary[entity.Id] = entity;
@@ -41,7 +41,7 @@ namespace DddBase.Repositories
             return Task.CompletedTask;
         }
 
-        public Task<IEnumerable<TEntity>> FindAllAsync(CancellationToken cancellationToken = default)
+        public Task<IEnumerable<TEntity>> ResolveAllAsync(CancellationToken cancellationToken = default)
         {
             return Task.FromResult<IEnumerable<TEntity>>(dictionary.Values);
         }

@@ -7,11 +7,11 @@ namespace DddBase.Repositories
     internal interface IRepository<TEntity, TKey>
         where TEntity : Entity<TKey>
     {
-        Task<IEnumerable<TEntity>> FindAllAsync(CancellationToken cancellationToken = default);
+        Task<IEnumerable<TEntity>> ResolveAllAsync(CancellationToken cancellationToken = default);
 
-        Task<TEntity> FindAsync(TKey key, CancellationToken cancellationToken = default);
+        Task<TEntity> ResolveAsync(TKey id, CancellationToken cancellationToken = default);
 
-        Task SaveAsync(TEntity entity, CancellationToken cancellationToken = default);
+        Task StoreAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
 
