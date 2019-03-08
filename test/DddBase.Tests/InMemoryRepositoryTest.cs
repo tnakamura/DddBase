@@ -7,19 +7,21 @@ namespace DddBase.Tests
 {
     public class InMemoryRepositoryTest
     {
-        public class TestEntity : Entity<Guid>
+        public class TestAggregate : IAggregate<Guid>
         {
-            public TestEntity(Guid id)
-                : base(id)
+            public TestAggregate(Guid id)
             {
+                Id = id;
             }
+
+            public Guid Id { get; }
         }
 
         [Fact]
         public async Task ResolveAsyncTest()
         {
-            var repository = new InMemoryRepository<TestEntity, Guid>();
-            var expected = new TestEntity(new Guid("E5318031-FF08-47A3-A35D-EE8F56B64C67"));
+            var repository = new InMemoryRepository<TestAggregate, Guid>();
+            var expected = new TestAggregate(new Guid("E5318031-FF08-47A3-A35D-EE8F56B64C67"));
             await repository.StoreAsync(expected);
 
             var actual = await repository.ResolveAsync(new Guid("E5318031-FF08-47A3-A35D-EE8F56B64C67"));

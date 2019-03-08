@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace DddBase.Repositories
 {
-    internal class InMemoryRepository<TEntity, TKey> : IRepository<TEntity, TKey>
-        where TEntity : Entity<TKey>
+    internal class InMemoryRepository<TAggregate, TKey> : IRepository<TAggregate, TKey>
+        where TAggregate : IAggregate<TKey>
     {
-        readonly ConcurrentDictionary<TKey, TEntity> dictionary;
+        readonly ConcurrentDictionary<TKey, TAggregate> dictionary;
 
         public InMemoryRepository()
         {
-            dictionary = new ConcurrentDictionary<TKey, TEntity>();
+            dictionary = new ConcurrentDictionary<TKey, TAggregate>();
         }
 
-        public Task<TEntity> ResolveAsync(TKey id, CancellationToken cancellationToken = default)
+        public Task<TAggregate> ResolveAsync(TKey id, CancellationToken cancellationToken = default)
         {
             if (dictionary.TryGetValue(id, out var value))
             {
@@ -24,14 +24,14 @@ namespace DddBase.Repositories
             }
             else
             {
-                return Task.FromResult(default(TEntity));
+                return Task.FromResult(default(TAggregate));
             }
         }
 
-        public Task StoreAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public Task StoreAsync(TAggregate aggregate, CancellationToken cancellationToken = default)
         {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
-            dictionary[entity.Id] = entity;
+            if (aggregate == null) throw new ArgumentNullException(nameof(aggregate));
+            dictionary[aggregate.Id] = aggregate;
             return Task.CompletedTask;
         }
 
@@ -41,14 +41,15 @@ namespace DddBase.Repositories
             return Task.CompletedTask;
         }
 
-        public Task<IEnumerable<TEntity>> ResolveAllAsync(CancellationToken cancellationToken = default)
+        public Task<IEnumerable<TAggregate>> ResolveAllAsync(CancellationToken cancellationToken = default)
         {
-            return Task.FromResult<IEnumerable<TEntity>>(dictionary.Values);
+            return Task.FromResult<IEnumerable<TAggregate>>(dictionary.Values);
         }
 
-        public Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public Task DeleteAsync(TAggregate aggregate, CancellationToken cancellationToken = default)
         {
-            dictionary.TryRemove(entity.Id, out _);
+            if (aggregate == null) throw new ArgumentNullException(nameof(aggregate));
+            dictionary.TryRemove(aggregate.Id, out _);
             return Task.CompletedTask;
         }
     }
