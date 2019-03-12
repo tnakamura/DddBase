@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace DddBase.Repositories
 {
+    // TODO: API Design
     internal interface IRepository<TAggregate, TKey>
         where TAggregate : IAggregate<TKey>
     {

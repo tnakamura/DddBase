@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8A2F8060-8E8A-49EE-AB35-0A41459E17E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddBase", "src\DddBase\DddBase.csproj", "{69CF873F-4B0D-446A-BA55-8D2C609C1C1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DddBase", "src\DddBase\DddBase.csproj", "{69CF873F-4B0D-446A-BA55-8D2C609C1C1A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4C4C665E-DB91-4630-B52F-1610528F5F29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddBase.Tests", "test\DddBase.Tests\DddBase.Tests.csproj", "{F180C2A0-3153-4890-9626-73B303D90D58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DddBase.Tests", "test\DddBase.Tests\DddBase.Tests.csproj", "{F180C2A0-3153-4890-9626-73B303D90D58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DddBase.EntityFrameworkCore", "src\DddBase.EntityFrameworkCore\DddBase.EntityFrameworkCore.csproj", "{214F673B-545B-4732-A7CE-B0F4F33D275F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{F180C2A0-3153-4890-9626-73B303D90D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F180C2A0-3153-4890-9626-73B303D90D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F180C2A0-3153-4890-9626-73B303D90D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{214F673B-545B-4732-A7CE-B0F4F33D275F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{214F673B-545B-4732-A7CE-B0F4F33D275F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{214F673B-545B-4732-A7CE-B0F4F33D275F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{214F673B-545B-4732-A7CE-B0F4F33D275F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{69CF873F-4B0D-446A-BA55-8D2C609C1C1A} = {8A2F8060-8E8A-49EE-AB35-0A41459E17E3}
 		{F180C2A0-3153-4890-9626-73B303D90D58} = {4C4C665E-DB91-4630-B52F-1610528F5F29}
+		{214F673B-545B-4732-A7CE-B0F4F33D275F} = {8A2F8060-8E8A-49EE-AB35-0A41459E17E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {62D29197-CAC6-4FCD-9EAF-11DBCCDF5E51}

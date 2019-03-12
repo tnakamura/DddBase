@@ -3,6 +3,8 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace DddBase.Repositories
 {
@@ -39,6 +41,13 @@ namespace DddBase.Repositories
         {
             dictionary.Clear();
             return Task.CompletedTask;
+        }
+
+        public Task<IEnumerable<TAggregate>> ResolveAllAsync(
+            Expression<Func<TAggregate, bool>> predicate,
+            CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(dictionary.Values.Where(predicate.Compile()));
         }
 
         public Task<IEnumerable<TAggregate>> ResolveAllAsync(CancellationToken cancellationToken = default)
