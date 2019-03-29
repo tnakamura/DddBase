@@ -12,6 +12,9 @@
     <RepositoryType>git</RepositoryType>
     <LangVersion>latest</LangVersion>
     <PackageReleaseNotes>Added the ValueObject&lt;TValueObject&gt; class.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/tnakamura/DddBase</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tnakamura/DddBase.git</RepositoryUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
