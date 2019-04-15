@@ -3,6 +3,15 @@
 DDD base class library for .NET application.
 
 
+## Features
+
+This library provide basic DDD base classes.
+
+- Entity : Entity is domain concept that have a unique identity
+- Identifier : Identifier is unique identifier for an Entity
+- ValueObject : Value Object is an entity's state, describing something about the entity
+- (ToDo) Repository : Repository is used to manage aggregate persistence
+
 ## Install
 
 ```
@@ -15,15 +24,14 @@ PM> Install-Package DddBase
 ### Identifier
 
 ```cs
-public class EntryId : Identifier<string>
+public class CustomerId : Identifier<string>
 {
-    public EntryId(string id)
+    public CustomerId(string id)
         : base(id)
     {
     }
 }
 ```
-
 
 ### ValueObject
 
@@ -46,6 +54,24 @@ public class Address : ValueObject<Address>
         Country = country;
         ZipCode = zipcode;
     }
+}
+```
+
+## Entity
+
+```cs
+public class Customer : Entity<CustomerId>
+{
+    public Customer(string name, Address address)
+        : base(CustomerId.NewCustomerId())
+    {
+        Name = name;
+        Address = address;
+    }
+
+    public string Name { get; private set; } 
+
+    public Address Address { get; private set; }
 }
 ```
 
