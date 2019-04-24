@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace DddBase.Repositories
 {
     internal class InMemoryRepository<TAggregate, TKey> : IRepository<TAggregate, TKey>
-        where TAggregate : IAggregate<TKey>
+        where TAggregate : IAggregateRoot<TKey>
     {
         readonly ConcurrentDictionary<TKey, TAggregate> dictionary;
 

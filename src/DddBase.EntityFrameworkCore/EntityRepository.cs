@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DddBase.EntityFrameworkCore
 {
     internal abstract class EntityRepository<TAggregate, TKey> : IRepository<TAggregate, TKey>
-        where TAggregate : class, IAggregate<TKey>
+        where TAggregate : class, IAggregateRoot<TKey>
     {
         readonly DbContext dbContext;
 

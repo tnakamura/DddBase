@@ -8,7 +8,7 @@ namespace DddBase.Tests
 {
     public class InMemoryRepositoryTest
     {
-        public class TestAggregate : IAggregate<Guid>
+        public class TestAggregate : IAggregateRoot<Guid>
         {
             public TestAggregate(Guid id)
             {

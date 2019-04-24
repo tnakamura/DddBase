@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 namespace DddBase.Repositories
 {
     // TODO: API Design
-    internal interface IRepository<TAggregate, TKey>
-        where TAggregate : IAggregate<TKey>
+    internal interface IRepository<TAggregateRoot, TKey>
+        where TAggregateRoot : IAggregateRoot<TKey>
     {
-        Task<IEnumerable<TAggregate>> ResolveAllAsync(CancellationToken cancellationToken = default);
+        Task<IEnumerable<TAggregateRoot>> ResolveAllAsync(CancellationToken cancellationToken = default);
 
-        Task<TAggregate> ResolveAsync(TKey id, CancellationToken cancellationToken = default);
+        Task<TAggregateRoot> ResolveAsync(TKey id, CancellationToken cancellationToken = default);
 
-        Task StoreAsync(TAggregate aggregate, CancellationToken cancellationToken = default);
+        Task StoreAsync(TAggregateRoot aggregate, CancellationToken cancellationToken = default);
 
-        Task DeleteAsync(TAggregate aggregate, CancellationToken cancellationToken = default);
+        Task DeleteAsync(TAggregateRoot aggregate, CancellationToken cancellationToken = default);
 
         Task DeleteAllAsync(CancellationToken cancellationToken = default);
     }

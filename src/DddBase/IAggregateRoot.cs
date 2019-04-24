@@ -1,7 +1,7 @@
 ﻿namespace DddBase
 {
     // TODO: API Design
-    internal interface IAggregate<TKey>
+    internal interface IAggregateRoot<TKey>
     {
         TKey Id { get; }
     }
