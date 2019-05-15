@@ -16,6 +16,8 @@ namespace DddBase.Repositories
 
         Task DeleteAsync(TAggregateRoot aggregate, CancellationToken cancellationToken = default);
 
-        Task DeleteAllAsync(CancellationToken cancellationToken = default);
+        Task<IEnumerable<TAggregateRoot>> FilterAsync(ISpecification<TAggregateRoot> spec, CancellationToken cancellationToken = default);
+
+        Task<int> CountAsync(ISpecification<TAggregateRoot> spec, CancellationToken cancellationToken = default);
     }
 }
