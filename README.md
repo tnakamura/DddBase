@@ -30,6 +30,11 @@ public class CustomerId : Identifier<string>
         : base(id)
     {
     }
+
+    public static CustomerId NewCustomerId()
+    {
+        return new CustomerId(Guid.NewGuid().ToString());
+    }
 }
 ```
 
