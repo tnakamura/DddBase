@@ -18,7 +18,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\src\github.com\tnakamura\DddBase\src\DddBase\DddBase.xml</DocumentationFile>
+    <DocumentationFile>E:\src\github.com\tnakamura\DddBase\src\DddBase\DddBase.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\src\github.com\tnakamura\DddBase\src\DddBase\DddBase.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
